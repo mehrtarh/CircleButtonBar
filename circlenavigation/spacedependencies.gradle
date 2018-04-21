@@ -1,0 +1,32 @@
+def dependencyGroup(Closure closure) {
+    closure.delegate = dependencies
+    return closure
+}
+
+project.ext {
+    supportLibrary = "27.1.1"
+}
+
+
+def support = dependencyGroup {
+    implementation "com.android.support:appcompat-v7:$project.supportLibrary"
+    implementation "com.android.support:support-v4:$project.supportLibrary"
+    implementation "com.android.support:design:$project.supportLibrary"
+}
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    support()
+
+}
+
+
+
+
+
+
+
+
+
+
