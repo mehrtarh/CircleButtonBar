@@ -25,6 +25,7 @@ import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
@@ -43,7 +44,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @SuppressWarnings("unused")
-public class CircleNavigationView extends RelativeLayout {
+public class CircleNavigationView extends BottomNavigationView {
 
     private static final String TAG = "SpaceNavigationView";
 
@@ -286,6 +287,10 @@ public class CircleNavigationView extends RelativeLayout {
      */
     private void initAndAddViewsToMainView() {
 
+        RelativeLayout baseView = new RelativeLayout(context);
+        baseView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+
+
         RelativeLayout mainContent = new RelativeLayout(context);
         centreBackgroundView = new RelativeLayout(context);
 
@@ -326,33 +331,33 @@ public class CircleNavigationView extends RelativeLayout {
         /*
          * Set fab layout params
          */
-        LayoutParams fabParams = new LayoutParams(centreButtonSize, centreButtonSize);
+        RelativeLayout.LayoutParams fabParams = new RelativeLayout.LayoutParams(centreButtonSize, centreButtonSize);
         fabParams.addRule(RelativeLayout.CENTER_IN_PARENT);
 
         /*
          * Main content size
          */
-        LayoutParams mainContentParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mainContentHeight);
+        RelativeLayout.LayoutParams mainContentParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mainContentHeight);
         mainContentParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 
         /*
          * Centre content size
          */
-        LayoutParams centreContentParams = new LayoutParams(centreContentWight, spaceNavigationHeight);
+        RelativeLayout.LayoutParams centreContentParams = new RelativeLayout.LayoutParams(centreContentWight, spaceNavigationHeight);
         centreContentParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
         centreContentParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 
         /*
          * Centre Background View content size and position
          */
-        LayoutParams centreBackgroundViewParams = new LayoutParams(centreContentWight, mainContentHeight);
+        RelativeLayout.LayoutParams centreBackgroundViewParams = new RelativeLayout.LayoutParams(centreContentWight, mainContentHeight);
         centreBackgroundViewParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
         centreBackgroundViewParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 
         /*
          * Left content size
          */
-        LayoutParams leftContentParams = new LayoutParams(contentWidth, mainContentHeight);
+        RelativeLayout.LayoutParams leftContentParams = new RelativeLayout.LayoutParams(contentWidth, mainContentHeight);
         leftContentParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
         leftContentParams.addRule(LinearLayout.HORIZONTAL);
         leftContentParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
@@ -360,7 +365,7 @@ public class CircleNavigationView extends RelativeLayout {
         /*
          * Right content size
          */
-        LayoutParams rightContentParams = new LayoutParams(contentWidth, mainContentHeight);
+        RelativeLayout.LayoutParams rightContentParams = new RelativeLayout.LayoutParams(contentWidth, mainContentHeight);
         rightContentParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         rightContentParams.addRule(LinearLayout.HORIZONTAL);
         rightContentParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
@@ -378,17 +383,17 @@ public class CircleNavigationView extends RelativeLayout {
         /*
          * Adding views to mainContent
          */
-        addView(centreBackgroundView, centreBackgroundViewParams);
-        addView(leftContent, leftContentParams);
-        addView(rightContent, rightContentParams);
+        baseView.addView(centreBackgroundView, centreBackgroundViewParams);
+        baseView.addView(leftContent, leftContentParams);
+        baseView.addView(rightContent, rightContentParams);
 
 
         /*
          * Adding views to mainView
          */
 
-        addView(centreContent, centreContentParams);
-        addView(mainContent, mainContentParams);
+        baseView.addView(centreContent, centreContentParams);
+        baseView.addView(mainContent, mainContentParams);
 
         /*
          * Restore changed icons and texts from savedInstance
@@ -399,7 +404,7 @@ public class CircleNavigationView extends RelativeLayout {
          * Adding current space items to left and right content
          */
         addSpaceItems(leftContent, rightContent);
-
+        addView(baseView);
 
         updateSpaceItems(-1);
     }
@@ -443,7 +448,7 @@ public class CircleNavigationView extends RelativeLayout {
 
             RelativeLayout.LayoutParams textAndIconContainerParams = new RelativeLayout.LayoutParams(
                     targetWidth, mainContentHeight);
-            RelativeLayout textAndIconContainer ;
+            RelativeLayout textAndIconContainer;
             if (inflater != null) {
                 textAndIconContainer = (RelativeLayout) inflater.inflate(R.layout.circle_item_view, this, false);
 
@@ -696,7 +701,6 @@ public class CircleNavigationView extends RelativeLayout {
             }
         }
     }
-
 
 
     /**

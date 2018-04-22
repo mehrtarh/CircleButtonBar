@@ -1,8 +1,7 @@
 package tameshk.itparsa.com.circlenavigationbar;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
+import android.support.v7.app.AppCompatActivity;
 
 import com.itparsa.circlenavigation.CircleItem;
 import com.itparsa.circlenavigation.CircleNavigationView;
@@ -15,10 +14,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         CircleNavigationView mCircleNavigationView;
         mCircleNavigationView = findViewById(R.id.navigation);
         mCircleNavigationView.initWithSaveInstanceState(savedInstanceState);
-        mCircleNavigationView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        mCircleNavigationView.setCentreButtonSelectable(true);
+//        mCircleNavigationView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
         mCircleNavigationView.addCircleItem(new CircleItem("setting", R.drawable.ic_settings));
         mCircleNavigationView.addCircleItem(new CircleItem("profile", R.drawable.ic_person));

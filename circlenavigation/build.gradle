@@ -3,13 +3,13 @@ apply plugin: 'com.github.dcendents.android-maven'
 group = 'com.github.mehrtarh'
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 25
 //    buildToolsVersion "25.0.1"
 
     defaultConfig {
         minSdkVersion 17
         //noinspection OldTargetApi
-        targetSdkVersion 17
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
         vectorDrawables.useSupportLibrary = true
@@ -21,6 +21,7 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
     }
 }
 apply from: "spacedependencies.gradle"
