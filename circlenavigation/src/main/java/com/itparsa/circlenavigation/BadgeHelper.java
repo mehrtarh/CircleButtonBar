@@ -1,6 +1,6 @@
 /*
  * Space Navigation library for Android
- * Copyright (c) 2016 Arman Chatikyan (https://github.com/armcha/Space-Navigation-View).
+ * Copyright (c) 2018 Mehran Jafari (https://github.com/mehrtarh/CircleButtonBar).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ package com.itparsa.circlenavigation;
 
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
-import android.os.Build;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorListenerAdapter;
 import android.view.View;
@@ -85,11 +84,7 @@ class BadgeHelper {
      */
     static void forceShowBadge(RelativeLayout view, BadgeItem badgeItem, boolean shouldShowBadgeWithNinePlus) {
         Utils.changeViewVisibilityVisible(view);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            view.setBackground(makeShapeDrawable(badgeItem.getBadgeColor()));
-        } else {
-            view.setBackgroundDrawable(makeShapeDrawable(badgeItem.getBadgeColor()));
-        }
+        view.setBackground(makeShapeDrawable(badgeItem.getBadgeColor()));
         TextView badgeTextView = (TextView) view.findViewById(R.id.badge_text_view);
         if (shouldShowBadgeWithNinePlus)
             badgeTextView.setText(badgeItem.getBadgeText());

@@ -1,6 +1,6 @@
 /*
  * Space Navigation library for Android
- * Copyright (c) 2016 Arman Chatikyan (https://github.com/armcha/Space-Navigation-View).
+ * Copyright (c) 2018 Mehran Jafari (https://github.com/mehrtarh/CircleButtonBar).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package com.itparsa.circlenavigation;
 
 import java.io.Serializable;
 
+@SuppressWarnings("unused")
 class BadgeItem implements Serializable {
 
     private static final int BADGE_TEXT_MAX_NUMBER = 9;

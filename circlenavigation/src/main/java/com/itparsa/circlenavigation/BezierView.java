@@ -1,6 +1,6 @@
 /*
  * Space Navigation library for Android
- * Copyright (c) 2016 Arman Chatikyan (https://github.com/armcha/Space-Navigation-View).
+ * Copyright (c) 2018 Mehran Jafari (https://github.com/mehrtarh/CircleButtonBar).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -60,33 +60,33 @@ class BezierView extends RelativeLayout {
     @Override
     protected void onDraw(Canvas canvas) {
 
-        /**
+        /*
          * Set paint color to fill view
          */
         paint.setColor(backgroundColor);
 
-        /**
+        /*
          * Reset path before drawing
          */
         path.reset();
 
-        /**
+        /*
          * Start point for drawing
          */
         path.moveTo(0, bezierHeight);
 
         if(!isLinear){
-            /**
+            /*
              * Seth half path of bezier view
              */
             path.cubicTo(bezierWidth / 4, bezierHeight, bezierWidth / 4, 0, bezierWidth / 2, 0);
-            /**
+            /*
              * Seth second part of bezier view
              */
             path.cubicTo((bezierWidth / 4) * 3, 0, (bezierWidth / 4) * 3, bezierHeight, bezierWidth, bezierHeight);
         }
 
-        /**
+        /*
          * Draw our bezier view
          */
         canvas.drawPath(path, paint);

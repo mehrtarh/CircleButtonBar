@@ -1,6 +1,6 @@
 /*
  * Space Navigation library for Android
- * Copyright (c) 2016 Arman Chatikyan (https://github.com/armcha/Space-Navigation-View).
+ * Copyright (c) 2018 Mehran Jafari (https://github.com/mehrtarh/CircleButtonBar).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,13 @@
  */
 package com.itparsa.circlenavigation;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.design.widget.FloatingActionButton;
@@ -42,6 +42,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+@SuppressWarnings("unused")
 public class CircleNavigationView extends RelativeLayout {
 
     private static final String TAG = "SpaceNavigationView";
@@ -53,8 +54,6 @@ public class CircleNavigationView extends RelativeLayout {
     private static final String CHANGED_ICON_AND_TEXT_BUNDLE_KEY = "changedIconAndText";
 
     private static final String CENTRE_BUTTON_ICON_KEY = "centreButtonIconKey";
-
-    private static final String CENTRE_BUTTON_COLOR_KEY = "centreButtonColorKey";
 
     private static final String SPACE_BACKGROUND_COLOR_KEY = "backgroundColorKey";
 
@@ -74,7 +73,9 @@ public class CircleNavigationView extends RelativeLayout {
     private List<CircleItem> spaceItems = new ArrayList<>();
     private List<View> spaceItemList = new ArrayList<>();
     private List<RelativeLayout> badgeList = new ArrayList<>();
+    @SuppressLint("UseSparseArrays")
     private HashMap<Integer, Object> badgeSaveInstanceHashMap = new HashMap<>();
+    @SuppressLint("UseSparseArrays")
     private HashMap<Integer, CircleItem> changedItemAndIconHashMap = new HashMap<>();
     private CircleOnClickListener spaceOnClickListener;
     private CircleOnLongClickListener spaceOnLongClickListener;
@@ -86,7 +87,6 @@ public class CircleNavigationView extends RelativeLayout {
     private Typeface customFont;
     private Context context;
     private int spaceItemIconSize = NOT_DEFINED;
-    private int centerBackGroundResource;
 
     private int spaceItemIconOnlySize = NOT_DEFINED;
 
@@ -146,11 +146,11 @@ public class CircleNavigationView extends RelativeLayout {
     }
 
 
-    public void setCenterBackGroundResource(int resource)
-
-    {
-        centerBackGroundResource = resource;
-    }
+//    public void setCenterBackGroundResource(int resource)
+//
+//    {
+//        centerBackGroundResource = resource;
+//    }
 
     /**
      * Init custom attributes
@@ -184,7 +184,7 @@ public class CircleNavigationView extends RelativeLayout {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-        /**
+        /*
          * Set default colors and sizes
          */
         if (spaceBackgroundColor == NOT_DEFINED)
@@ -220,7 +220,7 @@ public class CircleNavigationView extends RelativeLayout {
         if (inActiveCentreButtonIconColor == NOT_DEFINED)
             inActiveCentreButtonIconColor = ContextCompat.getColor(context, com.itparsa.circlenavigation.R.color.default_inactive_item_color);
 
-        /**
+        /*
          * Set main layout size and color
          */
         ViewGroup.LayoutParams params = getLayoutParams();
@@ -234,12 +234,12 @@ public class CircleNavigationView extends RelativeLayout {
     protected void onSizeChanged(int width, int height, int oldWidth, int oldHeight) {
         super.onSizeChanged(width, height, oldWidth, oldHeight);
 
-        /**
+        /*
          * Restore current item index from savedInstance
          */
         restoreCurrentItem();
 
-        /**
+        /*
          * Trow exceptions if items size is greater than 4 or lesser than 2
          */
         if (spaceItems.size() < MIN_SPACE_ITEM_SIZE && !isInEditMode()) {
@@ -252,27 +252,27 @@ public class CircleNavigationView extends RelativeLayout {
                     " your current items count is : " + spaceItems.size());
         }
 
-        /**
+        /*
          * Get left or right content width
          */
         contentWidth = (width - spaceNavigationHeight) / 2;
 
-        /**
+        /*
          * Removing all view for not being duplicated
          */
         removeAllViews();
 
-        /**
+        /*
          * Views initializations and customizing
          */
         initAndAddViewsToMainView();
 
-        /**
+        /*
          * Redraw main view to make subviews visible
          */
         postRequestLayout();
 
-        /**
+        /*
          * Retore Translation height
          */
 
@@ -323,33 +323,33 @@ public class CircleNavigationView extends RelativeLayout {
             }
         });
 
-        /**
+        /*
          * Set fab layout params
          */
         LayoutParams fabParams = new LayoutParams(centreButtonSize, centreButtonSize);
         fabParams.addRule(RelativeLayout.CENTER_IN_PARENT);
 
-        /**
+        /*
          * Main content size
          */
         LayoutParams mainContentParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mainContentHeight);
         mainContentParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 
-        /**
+        /*
          * Centre content size
          */
         LayoutParams centreContentParams = new LayoutParams(centreContentWight, spaceNavigationHeight);
         centreContentParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
         centreContentParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 
-        /**
+        /*
          * Centre Background View content size and position
          */
         LayoutParams centreBackgroundViewParams = new LayoutParams(centreContentWight, mainContentHeight);
         centreBackgroundViewParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
         centreBackgroundViewParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 
-        /**
+        /*
          * Left content size
          */
         LayoutParams leftContentParams = new LayoutParams(contentWidth, mainContentHeight);
@@ -357,7 +357,7 @@ public class CircleNavigationView extends RelativeLayout {
         leftContentParams.addRule(LinearLayout.HORIZONTAL);
         leftContentParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 
-        /**
+        /*
          * Right content size
          */
         LayoutParams rightContentParams = new LayoutParams(contentWidth, mainContentHeight);
@@ -365,17 +365,17 @@ public class CircleNavigationView extends RelativeLayout {
         rightContentParams.addRule(LinearLayout.HORIZONTAL);
         rightContentParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 
-        /**
+        /*
          * Adding views background colors
          */
         setBackgroundColors();
 
-        /**
+        /*
          * Adding view to centreContent
          */
         centreContent.addView(centreButton, fabParams);
 
-        /**
+        /*
          * Adding views to mainContent
          */
         addView(centreBackgroundView, centreBackgroundViewParams);
@@ -383,19 +383,19 @@ public class CircleNavigationView extends RelativeLayout {
         addView(rightContent, rightContentParams);
 
 
-        /**
+        /*
          * Adding views to mainView
          */
 
         addView(centreContent, centreContentParams);
         addView(mainContent, mainContentParams);
 
-        /**
+        /*
          * Restore changed icons and texts from savedInstance
          */
         //restoreChangedIconsAndTexts();
 
-        /**
+        /*
          * Adding current space items to left and right content
          */
         addSpaceItems(leftContent, rightContent);
@@ -412,7 +412,7 @@ public class CircleNavigationView extends RelativeLayout {
      */
     private void addSpaceItems(LinearLayout leftContent, LinearLayout rightContent) {
 
-        /**
+        /*
          * Removing all views for not being duplicated
          */
         if (leftContent.getChildCount() > 0 || rightContent.getChildCount() > 0) {
@@ -420,13 +420,13 @@ public class CircleNavigationView extends RelativeLayout {
             rightContent.removeAllViews();
         }
 
-        /**
+        /*
          * Clear spaceItemList and badgeList for not being duplicated
          */
         spaceItemList.clear();
         badgeList.clear();
 
-        /**
+        /*
          * Getting LayoutInflater to inflate space item view from XML
          */
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -443,105 +443,109 @@ public class CircleNavigationView extends RelativeLayout {
 
             RelativeLayout.LayoutParams textAndIconContainerParams = new RelativeLayout.LayoutParams(
                     targetWidth, mainContentHeight);
-            RelativeLayout textAndIconContainer = (RelativeLayout) inflater.inflate(R.layout.circle_item_view, this, false);
-            textAndIconContainer.setLayoutParams(textAndIconContainerParams);
+            RelativeLayout textAndIconContainer ;
+            if (inflater != null) {
+                textAndIconContainer = (RelativeLayout) inflater.inflate(R.layout.circle_item_view, this, false);
 
-            ImageView spaceItemIcon = (ImageView) textAndIconContainer.findViewById(R.id.space_icon);
-            TextView spaceItemText = (TextView) textAndIconContainer.findViewById(R.id.space_text);
-            RelativeLayout badgeContainer = (RelativeLayout) textAndIconContainer.findViewById(R.id.badge_container);
-            spaceItemIcon.setImageResource(spaceItems.get(i).getItemIcon());
-            spaceItemText.setText(spaceItems.get(i).getItemName());
-            spaceItemText.setTextSize(TypedValue.COMPLEX_UNIT_PX, spaceItemTextSize);
+                textAndIconContainer.setLayoutParams(textAndIconContainerParams);
+
+                ImageView spaceItemIcon = (ImageView) textAndIconContainer.findViewById(R.id.space_icon);
+                TextView spaceItemText = (TextView) textAndIconContainer.findViewById(R.id.space_text);
+                RelativeLayout badgeContainer = (RelativeLayout) textAndIconContainer.findViewById(R.id.badge_container);
+                spaceItemIcon.setImageResource(spaceItems.get(i).getItemIcon());
+                spaceItemText.setText(spaceItems.get(i).getItemName());
+                spaceItemText.setTextSize(TypedValue.COMPLEX_UNIT_PX, spaceItemTextSize);
 
 
-            /**
-             * Set custom font to space item textView
-             */
-            if (isCustomFont)
-                spaceItemText.setTypeface(customFont);
+                /*
+                 * Set custom font to space item textView
+                 */
+                if (isCustomFont)
+                    spaceItemText.setTypeface(customFont);
 
-            /**
-             * Hide item icon and show only text
-             */
-            if (isTextOnlyMode)
-                Utils.changeViewVisibilityGone(spaceItemIcon);
+                /*
+                 * Hide item icon and show only text
+                 */
+                if (isTextOnlyMode)
+                    Utils.changeViewVisibilityGone(spaceItemIcon);
 
-            /**
-             * Hide item text and change icon size
-             */
-            ViewGroup.LayoutParams iconParams = spaceItemIcon.getLayoutParams();
-            if (isIconOnlyMode) {
-                iconParams.height = spaceItemIconOnlySize;
-                iconParams.width = spaceItemIconOnlySize;
-                spaceItemIcon.setLayoutParams(iconParams);
-                Utils.changeViewVisibilityGone(spaceItemText);
-            } else {
-                iconParams.height = spaceItemIconSize;
-                iconParams.width = spaceItemIconSize;
-                spaceItemIcon.setLayoutParams(iconParams);
-            }
-
-            /**
-             * Adding space items to item list for future
-             */
-            spaceItemList.add(textAndIconContainer);
-
-            /**
-             * Adding badge items to badge list for future
-             */
-            badgeList.add(badgeContainer);
-
-            /**
-             * Adding sub views to left and right sides
-             */
-            if (spaceItems.size() == MIN_SPACE_ITEM_SIZE && leftContent.getChildCount() == 1) {
-                rightContent.addView(textAndIconContainer, textAndIconContainerParams);
-            } else if (spaceItems.size() > MIN_SPACE_ITEM_SIZE && leftContent.getChildCount() == 2) {
-                rightContent.addView(textAndIconContainer, textAndIconContainerParams);
-            } else {
-                leftContent.addView(textAndIconContainer, textAndIconContainerParams);
-            }
-
-            /**
-             * Changing current selected item tint
-             */
-            if (i == currentSelectedItem) {
-                spaceItemText.setTextColor(activeSpaceItemColor);
-                spaceItemText.setVisibility(VISIBLE);
-                iconParams.height = spaceItemIconOnlySize;
-                iconParams.width = spaceItemIconOnlySize;
-                spaceItemIcon.setLayoutParams(iconParams);
-                Utils.changeImageViewTint(spaceItemIcon, activeSpaceItemColor);
-            } else {
-                spaceItemText.setTextColor(inActiveSpaceItemColor);
-                spaceItemText.setVisibility(GONE);
-                iconParams.height = spaceItemIconOnlySize;
-                iconParams.width = spaceItemIconOnlySize;
-                spaceItemIcon.setLayoutParams(iconParams);
-                Utils.changeImageViewTint(spaceItemIcon, inActiveSpaceItemColor);
-            }
-
-            textAndIconContainer.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    updateSpaceItems(index);
+                /*
+                 * Hide item text and change icon size
+                 */
+                ViewGroup.LayoutParams iconParams = spaceItemIcon.getLayoutParams();
+                if (isIconOnlyMode) {
+                    iconParams.height = spaceItemIconOnlySize;
+                    iconParams.width = spaceItemIconOnlySize;
+                    spaceItemIcon.setLayoutParams(iconParams);
+                    Utils.changeViewVisibilityGone(spaceItemText);
+                } else {
+                    iconParams.height = spaceItemIconSize;
+                    iconParams.width = spaceItemIconSize;
+                    spaceItemIcon.setLayoutParams(iconParams);
                 }
-            });
 
-            textAndIconContainer.setOnLongClickListener(new OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    if (spaceOnLongClickListener != null)
-                        spaceOnLongClickListener.onItemLongClick(index, spaceItems.get(index).getItemName());
-                    return true;
+                /*
+                 * Adding space items to item list for future
+                 */
+                spaceItemList.add(textAndIconContainer);
+
+                /*
+                 * Adding badge items to badge list for future
+                 */
+                badgeList.add(badgeContainer);
+
+                /*
+                 * Adding sub views to left and right sides
+                 */
+                if (spaceItems.size() == MIN_SPACE_ITEM_SIZE && leftContent.getChildCount() == 1) {
+                    rightContent.addView(textAndIconContainer, textAndIconContainerParams);
+                } else if (spaceItems.size() > MIN_SPACE_ITEM_SIZE && leftContent.getChildCount() == 2) {
+                    rightContent.addView(textAndIconContainer, textAndIconContainerParams);
+                } else {
+                    leftContent.addView(textAndIconContainer, textAndIconContainerParams);
                 }
-            });
+
+                /*
+                 * Changing current selected item tint
+                 */
+                if (i == currentSelectedItem) {
+                    spaceItemText.setTextColor(activeSpaceItemColor);
+                    spaceItemText.setVisibility(VISIBLE);
+                    iconParams.height = spaceItemIconOnlySize;
+                    iconParams.width = spaceItemIconOnlySize;
+                    spaceItemIcon.setLayoutParams(iconParams);
+                    Utils.changeImageViewTint(spaceItemIcon, activeSpaceItemColor);
+                } else {
+                    spaceItemText.setTextColor(inActiveSpaceItemColor);
+                    spaceItemText.setVisibility(GONE);
+                    iconParams.height = spaceItemIconOnlySize;
+                    iconParams.width = spaceItemIconOnlySize;
+                    spaceItemIcon.setLayoutParams(iconParams);
+                    Utils.changeImageViewTint(spaceItemIcon, inActiveSpaceItemColor);
+                }
+
+                textAndIconContainer.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        updateSpaceItems(index);
+                    }
+                });
+
+                textAndIconContainer.setOnLongClickListener(new OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View v) {
+                        if (spaceOnLongClickListener != null)
+                            spaceOnLongClickListener.onItemLongClick(index, spaceItems.get(index).getItemName());
+                        return true;
+                    }
+                });
+            }
+
+            /*
+             * Restore available badges from saveInstance
+             */
+            restoreBadges();
         }
-
-        /**
-         * Restore available badges from saveInstance
-         */
-        restoreBadges();
     }
 
     /**
@@ -551,7 +555,7 @@ public class CircleNavigationView extends RelativeLayout {
      */
     private void updateSpaceItems(final int selectedIndex) {
 
-        /**
+        /*
          * return if item already selected
          */
         if (currentSelectedItem == selectedIndex) {
@@ -562,7 +566,7 @@ public class CircleNavigationView extends RelativeLayout {
         }
 
         if (isCentreButtonSelectable) {
-            /**
+            /*
              * Selects the centre button as current
              */
             if (selectedIndex == -1) {
@@ -577,7 +581,7 @@ public class CircleNavigationView extends RelativeLayout {
                 }
             }
 
-            /**
+            /*
              * Removes selection from centre button
              */
             if (currentSelectedItem == -1) {
@@ -591,7 +595,7 @@ public class CircleNavigationView extends RelativeLayout {
             }
         }
 
-        /**
+        /*
          * Change active and inactive icon and text color
          */
         for (int i = 0; i < spaceItemList.size(); i++) {
@@ -621,7 +625,7 @@ public class CircleNavigationView extends RelativeLayout {
 
         }
 
-        /**
+        /*
          * Set a listener that gets fired when the selected item changes
          *
          * @param listener a listener for monitoring changes in item selection
@@ -629,7 +633,7 @@ public class CircleNavigationView extends RelativeLayout {
         if (spaceOnClickListener != null && selectedIndex >= 0)
             spaceOnClickListener.onItemClick(selectedIndex, spaceItems.get(selectedIndex).getItemName());
 
-        /**
+        /*
          * Change current selected item index
          */
         currentSelectedItem = selectedIndex;
@@ -693,36 +697,7 @@ public class CircleNavigationView extends RelativeLayout {
         }
     }
 
-    /**
-     * Restore changed icons,colors and texts from saveInstance
-     */
-    @SuppressWarnings("unchecked")
-    private void restoreChangedIconsAndTexts() {
-        Bundle restoredBundle = savedInstanceState;
-        if (restoredBundle != null) {
-            if (restoredBundle.containsKey(CHANGED_ICON_AND_TEXT_BUNDLE_KEY)) {
-                changedItemAndIconHashMap = (HashMap<Integer, CircleItem>) restoredBundle.getSerializable(CHANGED_ICON_AND_TEXT_BUNDLE_KEY);
-                if (changedItemAndIconHashMap != null) {
-                    CircleItem spaceItem;
-                    for (int i = 0; i < changedItemAndIconHashMap.size(); i++) {
-                        spaceItem = changedItemAndIconHashMap.get(i);
-                        spaceItems.get(i).setItemIcon(spaceItem.getItemIcon());
-                        spaceItems.get(i).setItemName(spaceItem.getItemName());
-                    }
-                }
-            }
 
-            if (restoredBundle.containsKey(CENTRE_BUTTON_ICON_KEY)) {
-                centreButtonIcon = restoredBundle.getInt(CENTRE_BUTTON_ICON_KEY);
-                centreButton.setImageResource(centreButtonIcon);
-            }
-
-            if (restoredBundle.containsKey(SPACE_BACKGROUND_COLOR_KEY)) {
-                int backgroundColor = restoredBundle.getInt(SPACE_BACKGROUND_COLOR_KEY);
-                changeSpaceBackgroundColor(backgroundColor);
-            }
-        }
-    }
 
     /**
      * Creating bezier view with params
@@ -951,14 +926,10 @@ public class CircleNavigationView extends RelativeLayout {
         } else {
             RelativeLayout badgeView = badgeList.get(itemIndex);
 
-            /**
+            /*
              * Set circle background to badge view
              */
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                badgeView.setBackground(BadgeHelper.makeShapeDrawable(badgeColor));
-            } else {
-                badgeView.setBackgroundDrawable(BadgeHelper.makeShapeDrawable(badgeColor));
-            }
+            badgeView.setBackground(BadgeHelper.makeShapeDrawable(badgeColor));
 
             BadgeItem badgeItem = new BadgeItem(itemIndex, badgeText, badgeColor);
             BadgeHelper.showBadge(badgeView, badgeItem, shouldShowBadgeWithNinePlus);

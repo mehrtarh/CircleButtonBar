@@ -4,7 +4,7 @@ def dependencyGroup(Closure closure) {
 }
 
 project.ext {
-    supportLibrary = "23.0.1"
+    supportLibrary = "24.0.0"
 }
 
 

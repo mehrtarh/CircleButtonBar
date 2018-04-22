@@ -1,6 +1,6 @@
 /*
  * Space Navigation library for Android
- * Copyright (c) 2016 Arman Chatikyan (https://github.com/armcha/Space-Navigation-View).
+ * Copyright (c) 2018 Mehran Jafari (https://github.com/mehrtarh/CircleButtonBar).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ import android.graphics.drawable.RippleDrawable;
 import android.view.View;
 import android.widget.ImageView;
 
+@SuppressWarnings("unused")
 class Utils {
 
     /**
@@ -83,7 +84,7 @@ class Utils {
                 .start();
     }
 
-    // TODO: 15.08.2016 add ripple effect programmatically
+
     @TargetApi(21)
     static RippleDrawable getPressedColorRippleDrawable(int normalColor, int pressedColor) {
         return new RippleDrawable(getPressedColorSelector(normalColor, pressedColor), new ColorDrawable(normalColor), null);

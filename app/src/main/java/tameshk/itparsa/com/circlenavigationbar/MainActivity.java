@@ -10,12 +10,12 @@ import com.itparsa.circlenavigation.CircleOnClickListener;
 
 public class MainActivity extends AppCompatActivity {
 
-    private CircleNavigationView mCircleNavigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        CircleNavigationView mCircleNavigationView;
         mCircleNavigationView = findViewById(R.id.navigation);
         mCircleNavigationView.initWithSaveInstanceState(savedInstanceState);
         mCircleNavigationView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);

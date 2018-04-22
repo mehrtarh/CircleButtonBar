@@ -3,11 +3,12 @@ apply plugin: 'com.github.dcendents.android-maven'
 group = 'com.github.mehrtarh'
 
 android {
-    compileSdkVersion 21
+    compileSdkVersion 23
 //    buildToolsVersion "25.0.1"
 
     defaultConfig {
         minSdkVersion 17
+        //noinspection OldTargetApi
         targetSdkVersion 17
         versionCode 1
         versionName "1.0"
