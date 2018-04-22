@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         CircleNavigationView mCircleNavigationView;
-        mCircleNavigationView = findViewById(R.id.navigation);
+        mCircleNavigationView = (CircleNavigationView)findViewById(R.id.navigation);
         mCircleNavigationView.initWithSaveInstanceState(savedInstanceState);
         mCircleNavigationView.setCentreButtonSelectable(true);
 //        mCircleNavigationView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);

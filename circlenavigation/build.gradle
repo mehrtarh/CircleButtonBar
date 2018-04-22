@@ -4,12 +4,13 @@ group = 'com.github.mehrtarh'
 
 android {
     compileSdkVersion 25
-//    buildToolsVersion "25.0.1"
+    //noinspection GradleDependency
+    buildToolsVersion "25.0.2"
 
     defaultConfig {
-        minSdkVersion 17
+        minSdkVersion 15
         //noinspection OldTargetApi
-        targetSdkVersion 25
+        targetSdkVersion 15
         versionCode 1
         versionName "1.0"
         vectorDrawables.useSupportLibrary = true

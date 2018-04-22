@@ -1,11 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 25
+    //noinspection GradleDependency
+    buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "com.itparsa.circlenavigationbar"
-        minSdkVersion 17
-        targetSdkVersion 27
+        minSdkVersion 15
+        //noinspection OldTargetApi
+        targetSdkVersion 15
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -22,13 +25,17 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation "com.android.support:design:27.1.1"
-    implementation (project(':circlenavigation'))
-//            {
-//                exclude group: 'com.android.support',module: 'appcompat-v7'
-//                exclude group: 'com.android.support',module: 'support-v4'
-//                exclude group: 'com.android.support',module: 'design'
-//            }
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    //noinspection GradleDependency
+    compile 'com.android.support:appcompat-v7:25.1.1'
+    //noinspection GradleDependency
+    compile 'com.android.support:design:25.1.1'
+
+    //    compile project(':circlenavigation')
+    //            {
+    //                exclude group: 'com.android.support',module: 'appcompat-v7'
+    //                exclude group: 'com.android.support',module: 'support-v4'
+    //                exclude group: 'com.android.support',module: 'design'
+    //            }
+    compile project(':circlenavigation')
 }

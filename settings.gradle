@@ -1,1 +1,1 @@
-include ':app','circlenavigation'
+include ':app',':circlenavigation'

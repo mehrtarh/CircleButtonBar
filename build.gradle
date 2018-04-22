@@ -6,12 +6,13 @@ buildscript {
 
         jcenter()
 //        google()
-        maven {
-            url "https://maven.google.com"
-        }
+//        maven {
+//            url "https://maven.google.com"
+//        }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.1'
+        //noinspection GradleDependency
+        classpath 'com.android.tools.build:gradle:2.2.3'
         //noinspection GradleDependency
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
 
@@ -26,9 +27,9 @@ allprojects {
         jcenter()
         maven { url 'https://jitpack.io' }
 //        google()
-        maven {
-            url "https://maven.google.com"
-        }
+//        maven {
+//            url "https://maven.google.com"
+//        }
     }
 }
 
