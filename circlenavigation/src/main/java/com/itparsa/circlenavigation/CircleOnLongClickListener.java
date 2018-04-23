@@ -1,5 +1,5 @@
 /*
- * Space Navigation library for Android
+ * CircleBottomBar library for Android
  * Copyright (c) 2018 Mehran Jafari (https://github.com/mehrtarh/CircleButtonBar).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");

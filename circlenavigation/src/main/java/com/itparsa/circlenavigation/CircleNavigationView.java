@@ -1,5 +1,5 @@
 /*
- * Space Navigation library for Android
+ * CircleBottomBar library for Android
  * Copyright (c) 2018 Mehran Jafari (https://github.com/mehrtarh/CircleButtonBar).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,6 +23,7 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.design.widget.BottomNavigationView;
@@ -933,7 +934,9 @@ public class CircleNavigationView extends BottomNavigationView {
             /*
              * Set circle background to badge view
              */
-            badgeView.setBackground(BadgeHelper.makeShapeDrawable(badgeColor));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                badgeView.setBackground(BadgeHelper.makeShapeDrawable(badgeColor));
+            }
 
             BadgeItem badgeItem = new BadgeItem(itemIndex, badgeText, badgeColor);
             BadgeHelper.showBadge(badgeView, badgeItem, shouldShowBadgeWithNinePlus);
