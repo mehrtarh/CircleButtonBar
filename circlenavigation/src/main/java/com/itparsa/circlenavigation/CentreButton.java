@@ -19,10 +19,11 @@ package com.itparsa.circlenavigation;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.support.design.widget.FloatingActionButton;
 import android.view.MotionEvent;
 
+
 public class CentreButton extends FloatingActionButton {
+
 
     public CentreButton(Context context) {
         super(context);
@@ -33,11 +34,15 @@ public class CentreButton extends FloatingActionButton {
     public boolean onTouchEvent(MotionEvent ev) {
         boolean result = super.onTouchEvent(ev);
         if (!result) {
-            if(ev.getAction() == MotionEvent.ACTION_UP) {
+            if (ev.getAction() == MotionEvent.ACTION_UP) {
                 cancelLongPress();
             }
             setPressed(false);
         }
         return result;
     }
+
+
+
+
 }

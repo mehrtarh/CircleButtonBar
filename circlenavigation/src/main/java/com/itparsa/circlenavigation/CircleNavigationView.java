@@ -18,16 +18,14 @@ package com.itparsa.circlenavigation;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
-import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
+import android.support.annotation.DrawableRes;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -106,6 +104,8 @@ public class CircleNavigationView extends BottomNavigationView {
 
     private int centreButtonIcon = NOT_DEFINED;
 
+    private int centerButtonSelectedIcon = NOT_DEFINED;
+
     private int activeSpaceItemColor = NOT_DEFINED;
 
     private int inActiveSpaceItemColor = NOT_DEFINED;
@@ -129,6 +129,8 @@ public class CircleNavigationView extends BottomNavigationView {
     private boolean isCentreButtonIconColorFilterEnabled = true;
 
     private boolean shouldShowBadgeWithNinePlus = true;
+
+    private int centerButtonResurceBackground = NOT_DEFINED;
 
     /**
      * Constructors
@@ -169,14 +171,15 @@ public class CircleNavigationView extends BottomNavigationView {
             spaceItemTextSize = typedArray.getDimensionPixelSize(com.itparsa.circlenavigation.R.styleable.CircleNavigationView_space_item_text_size, resources.getDimensionPixelSize(com.itparsa.circlenavigation.R.dimen.space_item_text_default_size));
             spaceItemIconOnlySize = typedArray.getDimensionPixelSize(com.itparsa.circlenavigation.R.styleable.CircleNavigationView_space_item_icon_only_size, resources.getDimensionPixelSize(com.itparsa.circlenavigation.R.dimen.space_item_icon_only_size));
             spaceBackgroundColor = typedArray.getColor(com.itparsa.circlenavigation.R.styleable.CircleNavigationView_space_background_color, resources.getColor(com.itparsa.circlenavigation.R.color.space_default_color));
-            centreButtonColor = typedArray.getColor(com.itparsa.circlenavigation.R.styleable.CircleNavigationView_centre_button_color, resources.getColor(com.itparsa.circlenavigation.R.color.centre_button_color));
+            centreButtonColor = typedArray.getColor(com.itparsa.circlenavigation.R.styleable.CircleNavigationView_inactive_center_button_background_color, resources.getColor(com.itparsa.circlenavigation.R.color.centre_button_color));
             activeSpaceItemColor = typedArray.getColor(com.itparsa.circlenavigation.R.styleable.CircleNavigationView_active_item_color, resources.getColor(com.itparsa.circlenavigation.R.color.space_white));
             inActiveSpaceItemColor = typedArray.getColor(com.itparsa.circlenavigation.R.styleable.CircleNavigationView_inactive_item_color, resources.getColor(com.itparsa.circlenavigation.R.color.default_inactive_item_color));
-            centreButtonIcon = typedArray.getResourceId(R.styleable.CircleNavigationView_centre_button_icon, R.drawable.near_me);
-            isCentrePartLinear = typedArray.getBoolean(R.styleable.CircleNavigationView_centre_part_linear, false);
-            activeCentreButtonIconColor = typedArray.getColor(R.styleable.CircleNavigationView_active_centre_button_icon_color, resources.getColor(R.color.space_white));
-            inActiveCentreButtonIconColor = typedArray.getColor(R.styleable.CircleNavigationView_inactive_centre_button_icon_color, resources.getColor(com.itparsa.circlenavigation.R.color.default_inactive_item_color));
-            activeCentreButtonBackgroundColor = typedArray.getColor(R.styleable.CircleNavigationView_active_centre_button_background_color, resources.getColor(com.itparsa.circlenavigation.R.color.centre_button_color));
+            centreButtonIcon = typedArray.getResourceId(R.styleable.CircleNavigationView_center_button_icon, R.drawable.near_me);
+            centerButtonSelectedIcon = typedArray.getResourceId(R.styleable.CircleNavigationView_center_button_selected_icon, R.drawable.near_me);
+            isCentrePartLinear = typedArray.getBoolean(R.styleable.CircleNavigationView_center_part_linear, false);
+            activeCentreButtonIconColor = typedArray.getColor(R.styleable.CircleNavigationView_active_center_button_icon_color, resources.getColor(R.color.space_white));
+            inActiveCentreButtonIconColor = typedArray.getColor(R.styleable.CircleNavigationView_inactive_center_button_icon_color, resources.getColor(com.itparsa.circlenavigation.R.color.default_inactive_item_color));
+            activeCentreButtonBackgroundColor = typedArray.getColor(R.styleable.CircleNavigationView_active_center_button_background_color, resources.getColor(com.itparsa.circlenavigation.R.color.centre_button_color));
 
             typedArray.recycle();
         }
@@ -197,6 +200,9 @@ public class CircleNavigationView extends BottomNavigationView {
 
         if (centreButtonIcon == NOT_DEFINED)
             centreButtonIcon = R.drawable.near_me;
+
+        if (centreButtonIcon == NOT_DEFINED)
+            centerButtonSelectedIcon = centreButtonIcon;
 
         if (activeSpaceItemColor == NOT_DEFINED)
             activeSpaceItemColor = ContextCompat.getColor(context, com.itparsa.circlenavigation.R.color.space_white);
@@ -301,18 +307,26 @@ public class CircleNavigationView extends BottomNavigationView {
         centreContent = buildBezierView();
 
         centreButton = new CentreButton(context);
-        centreButton.setSize(FloatingActionButton.SIZE_NORMAL);
-        centreButton.setUseCompatPadding(false);
-        centreButton.setRippleColor(centreButtonRippleColor);
-        centreButton.setBackgroundTintList(ColorStateList.valueOf(centreButtonColor));
-        centreButton.setImageResource(centreButtonIcon);
+//        centreButton.setSize(FloatingActionButton.SIZE_NORMAL);
+//        centreButton.setUseCompatPadding(false);
+        //centreButton.setRippleColor(centreButtonRippleColor);
+        if (centerButtonResurceBackground != NOT_DEFINED) {
+            centreButton.setFabBackground(centerButtonResurceBackground);
+
+        }
+
+        centreButton.setFabIconResource(centreButtonIcon);
+//        centreButton.setImageResource(centreButtonIcon);
+
 
         if (isCentreButtonIconColorFilterEnabled || isCentreButtonSelectable)
-            centreButton.getDrawable().setColorFilter(inActiveCentreButtonIconColor, PorterDuff.Mode.SRC_IN);
+            centreButton.setFabIconColor(inActiveCentreButtonIconColor);
+//            centreButton.getDrawable().setColorFilter(inActiveCentreButtonIconColor, PorterDuff.Mode.SRC_IN);
 
         centreButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if (spaceOnClickListener != null)
                     spaceOnClickListener.onCentreButtonClick();
                 if (isCentreButtonSelectable)
@@ -577,12 +591,17 @@ public class CircleNavigationView extends BottomNavigationView {
              */
             if (selectedIndex == -1) {
                 if (centreButton != null) {
-                    centreButton.getDrawable().setColorFilter(activeCentreButtonIconColor, PorterDuff.Mode.SRC_IN);
 
-                    if (activeCentreButtonBackgroundColor != NOT_DEFINED) {
-                        centreButton.setBackgroundTintList(ColorStateList.valueOf(activeCentreButtonBackgroundColor));
+                    if (centerButtonResurceBackground == NOT_DEFINED && activeCentreButtonBackgroundColor != NOT_DEFINED) {
+//                        centreButton.setBackgroundTintList(ColorStateList.valueOf(activeCentreButtonBackgroundColor));
+                        centreButton.setFabColor(activeCentreButtonBackgroundColor);
 //                        centreButton.setImageResource(centerBackGroundResource);
                     }
+
+                    centreButton.setFabIconResource(centerButtonSelectedIcon);
+
+                    centreButton.setFabIconColor(activeCentreButtonIconColor);
+//                    centreButton.getDrawable().setColorFilter(activeCentreButtonIconColor, PorterDuff.Mode.SRC_IN);
 
                 }
             }
@@ -592,11 +611,17 @@ public class CircleNavigationView extends BottomNavigationView {
              */
             if (currentSelectedItem == -1) {
                 if (centreButton != null) {
-                    centreButton.getDrawable().setColorFilter(inActiveCentreButtonIconColor, PorterDuff.Mode.SRC_IN);
 
-                    if (activeCentreButtonBackgroundColor != NOT_DEFINED) {
-                        centreButton.setBackgroundTintList(ColorStateList.valueOf(centreButtonColor));
+//                    centreButton.setImageResource(centreButtonIcon);
+                    centreButton.setFabIconResource(centreButtonIcon);
+
+//                    centreButton.getDrawable().setColorFilter(inActiveCentreButtonIconColor, PorterDuff.Mode.SRC_IN);
+                    centreButton.setFabIconColor(inActiveCentreButtonIconColor);
+                     if (centerButtonResurceBackground == NOT_DEFINED &&activeCentreButtonBackgroundColor != NOT_DEFINED) {
+//                        centreButton.setBackgroundTintList(ColorStateList.valueOf(centreButtonColor));
+                         centreButton.setFabColor(centreButtonColor);
                     }
+
                 }
             }
         }
@@ -614,8 +639,15 @@ public class CircleNavigationView extends BottomNavigationView {
                 iconParams.height = spaceItemIconOnlySize;
                 iconParams.width = spaceItemIconOnlySize;
                 spaceItemIcon.setLayoutParams(iconParams);
-                spaceItemText.setTextColor(activeSpaceItemColor);
-                Utils.changeImageViewTint(spaceItemIcon, activeSpaceItemColor);
+                if (selectedIndex >= 0 && spaceItems.get(selectedIndex).getItemSelectedColor() != 0) {
+                    spaceItemText.setTextColor(spaceItems.get(selectedIndex).getItemSelectedColor());
+                    Utils.changeImageViewTint(spaceItemIcon, spaceItems.get(selectedIndex).getItemSelectedColor());
+                } else {
+                    spaceItemText.setTextColor(activeSpaceItemColor);
+                    Utils.changeImageViewTint(spaceItemIcon, activeSpaceItemColor);
+                }
+//                spaceItemText.setTextColor(activeSpaceItemColor);
+//                Utils.changeImageViewTint(spaceItemIcon, activeSpaceItemColor);
             } else if (i == currentSelectedItem) {
                 RelativeLayout textAndIconContainer = (RelativeLayout) spaceItemList.get(i);
                 ImageView spaceItemIcon = (ImageView) textAndIconContainer.findViewById(R.id.space_icon);
@@ -625,8 +657,13 @@ public class CircleNavigationView extends BottomNavigationView {
                 iconParams.width = spaceItemIconOnlySize;
                 spaceItemIcon.setLayoutParams(iconParams);
                 spaceItemText.setVisibility(GONE);
+//                if (selectedIndex >= 0 && spaceItems.get(selectedIndex).getItemSelectedColor() != 0) {
+//                    spaceItemText.setTextColor(spaceItems.get(selectedIndex).getItemSelectedColor());
+//                    Utils.changeImageViewTint(spaceItemIcon, spaceItems.get(selectedIndex).getItemSelectedColor());
+//                } else {
                 spaceItemText.setTextColor(inActiveSpaceItemColor);
                 Utils.changeImageViewTint(spaceItemIcon, inActiveSpaceItemColor);
+//                }
             }
 
         }
@@ -1057,7 +1094,8 @@ public class CircleNavigationView extends BottomNavigationView {
             Log.e(TAG, "You should call setCentreButtonIcon() instead, " +
                     "changeCenterButtonIcon works if space navigation already set up");
         } else {
-            centreButton.setImageResource(icon);
+//            centreButton.setImageResource(icon);
+            centreButton.setFabIconResource(icon);
             centreButtonIcon = icon;
         }
     }
@@ -1145,4 +1183,11 @@ public class CircleNavigationView extends BottomNavigationView {
     }
 
 
+    public void setCenterButtonSelectedIcon(int centerButtonSelectedIcon) {
+        this.centerButtonSelectedIcon = centerButtonSelectedIcon;
+    }
+
+    public void setCenterButtonResourceBackground(@DrawableRes int centerButtonResourceBackground) {
+        centerButtonResurceBackground = centerButtonResourceBackground;
+    }
 }

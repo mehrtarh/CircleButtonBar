@@ -13,12 +13,13 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_alignParentBottom="true"
-        app:inactive_centre_button_icon_color="#ffffff"
-        app:active_centre_button_background_color="#ec4545"
-        app:active_centre_button_icon_color="#97d221"
+        app:inactive_center_button_icon_color="#ffffff"
+        app:active_center_button_background_color="#ec4545"
+        app:active_center_button_icon_color="#030303"
         app:active_item_color="#f59b46"
-        app:centre_button_color="#a560cf"
-        app:centre_button_icon="@drawable/ic_home"
+        app:inactive_center_button_background_color="#b83dff"
+        app:center_button_icon="@drawable/ic_home"
+        app:center_button_selected_icon="@drawable/ic_chat"
         app:inactive_item_color="#ffff"
         app:space_background_color="#078d9c" />
 
