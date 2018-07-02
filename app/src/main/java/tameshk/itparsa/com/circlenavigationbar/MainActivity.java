@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         mCircleNavigationView.setCentreButtonSelectable(true);
 
         mCircleNavigationView.addCircleItem(
-                new CircleItem("setting", R.drawable.ic_settings, getResources().getColor(R.color.colorAccent)));
+                new CircleItem("setting", R.drawable.ic_settings, getResources().getColor(R.color.colorAccent),R.drawable.near_me));
         mCircleNavigationView.addCircleItem(new CircleItem("profile", R.drawable.ic_person, getResources().getColor(R.color.colorAccent)));
         mCircleNavigationView.addCircleItem(new CircleItem("chat", R.drawable.ic_chat, getResources().getColor(R.color.colorPrimary)));
         mCircleNavigationView.addCircleItem(new CircleItem("share", R.drawable.ic_share, getResources().getColor(R.color.colorPrimaryDark)));

@@ -17,6 +17,7 @@
 package com.itparsa.circlenavigation;
 
 import android.support.annotation.ColorInt;
+import android.support.annotation.DrawableRes;
 
 import java.io.Serializable;
 
@@ -26,15 +27,21 @@ public class CircleItem implements Serializable {
     private String itemName;
     private int itemIcon;
     private int itemSelectedColor;
+    private int itemSelectedIcon;
 
     public CircleItem(String itemName, int itemIcon) {
-        this(itemName,itemIcon,0);
+        this(itemName, itemIcon, 0);
     }
 
     public CircleItem(String itemName, int itemIcon, @ColorInt int itemSelectedColor) {
+        this(itemName, itemIcon, itemSelectedColor, 0);
+    }
+
+    public CircleItem(String itemName, int itemIcon, @ColorInt int itemSelectedColor, @DrawableRes int itemSelectedIcon) {
         this.itemName = itemName;
         this.itemIcon = itemIcon;
         this.itemSelectedColor = itemSelectedColor;
+        this.itemSelectedIcon = itemSelectedIcon;
     }
 
     String getItemName() {
@@ -59,5 +66,9 @@ public class CircleItem implements Serializable {
 
     void setItemSelectedColor(int itemIcon) {
         this.itemSelectedColor = itemIcon;
+    }
+
+    public int getItemSelectedIcon() {
+        return itemSelectedIcon;
     }
 }

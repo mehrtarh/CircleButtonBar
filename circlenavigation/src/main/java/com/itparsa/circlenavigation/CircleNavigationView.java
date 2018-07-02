@@ -639,6 +639,11 @@ public class CircleNavigationView extends BottomNavigationView {
                 iconParams.height = spaceItemIconOnlySize;
                 iconParams.width = spaceItemIconOnlySize;
                 spaceItemIcon.setLayoutParams(iconParams);
+
+                if (selectedIndex >= 0 && spaceItems.get(selectedIndex).getItemSelectedIcon() != 0) {
+                    spaceItemIcon.setImageResource(spaceItems.get(i).getItemSelectedIcon());
+                }
+
                 if (selectedIndex >= 0 && spaceItems.get(selectedIndex).getItemSelectedColor() != 0) {
                     spaceItemText.setTextColor(spaceItems.get(selectedIndex).getItemSelectedColor());
                     Utils.changeImageViewTint(spaceItemIcon, spaceItems.get(selectedIndex).getItemSelectedColor());
@@ -646,6 +651,8 @@ public class CircleNavigationView extends BottomNavigationView {
                     spaceItemText.setTextColor(activeSpaceItemColor);
                     Utils.changeImageViewTint(spaceItemIcon, activeSpaceItemColor);
                 }
+
+
 //                spaceItemText.setTextColor(activeSpaceItemColor);
 //                Utils.changeImageViewTint(spaceItemIcon, activeSpaceItemColor);
             } else if (i == currentSelectedItem) {
@@ -657,6 +664,7 @@ public class CircleNavigationView extends BottomNavigationView {
                 iconParams.width = spaceItemIconOnlySize;
                 spaceItemIcon.setLayoutParams(iconParams);
                 spaceItemText.setVisibility(GONE);
+                spaceItemIcon.setImageResource(spaceItems.get(i).getItemIcon());
 //                if (selectedIndex >= 0 && spaceItems.get(selectedIndex).getItemSelectedColor() != 0) {
 //                    spaceItemText.setTextColor(spaceItems.get(selectedIndex).getItemSelectedColor());
 //                    Utils.changeImageViewTint(spaceItemIcon, spaceItems.get(selectedIndex).getItemSelectedColor());
