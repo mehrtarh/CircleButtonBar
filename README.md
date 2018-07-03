@@ -21,7 +21,7 @@
 <p><strong>Add the dependency:</strong></p>
 <div class="highlight highlight-text-xml"><pre><span class="pl-ent">dependencies {</span>
 <span class="pl-ent">   </span><span class="pl-ent"></span>
- <span class="pl-ent"></span><span class="pl-ent"> compile 'com.github.mehrtarh:CircleButtonBar:v1.1.1'</span>
+ <span class="pl-ent"></span><span class="pl-ent"> compile 'com.github.mehrtarh:CircleButtonBar:v1.1.2'</span>
  <span class="pl-ent">   </span><span class="pl-ent"></span>
   <span class="pl-ent"></span>}<span class="pl-ent"></span>
 
