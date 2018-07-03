@@ -15,13 +15,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        CircleNavigationView mCircleNavigationView;
+        final CircleNavigationView mCircleNavigationView;
         mCircleNavigationView = (CircleNavigationView) findViewById(R.id.navigation);
         mCircleNavigationView.initWithSaveInstanceState(savedInstanceState);
         mCircleNavigationView.setCentreButtonSelectable(true);
 
         mCircleNavigationView.addCircleItem(
-                new CircleItem("setting", R.drawable.ic_settings, getResources().getColor(R.color.colorAccent),R.drawable.near_me));
+                new CircleItem("setting", R.drawable.ic_settings, getResources().getColor(R.color.colorAccent), R.drawable.near_me));
         mCircleNavigationView.addCircleItem(new CircleItem("profile", R.drawable.ic_person, getResources().getColor(R.color.colorAccent)));
         mCircleNavigationView.addCircleItem(new CircleItem("chat", R.drawable.ic_chat, getResources().getColor(R.color.colorPrimary)));
         mCircleNavigationView.addCircleItem(new CircleItem("share", R.drawable.ic_share, getResources().getColor(R.color.colorPrimaryDark)));
@@ -30,11 +30,15 @@ public class MainActivity extends AppCompatActivity {
         mCircleNavigationView.setCircleOnClickListener(new CircleOnClickListener() {
             @Override
             public void onCentreButtonClick() {
-
+                mCircleNavigationView.showBadgeAtIndex(2, 80, getResources().getColor(R.color.colorAccent)
+                        , 16, getResources().getColor(R.color.colorBadgeText));
             }
 
             @Override
             public void onItemClick(int itemIndex, String itemName) {
+
+                if (itemIndex == 2)
+                    mCircleNavigationView.hideBadgeAtIndex(2);
 
             }
 
@@ -43,9 +47,13 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+//        mCircleNavigationView.shouldShowFullBadgeText(false);
+
 
 //        mCircleNavigationView.setCentreButtonIcon(R.drawable.ic_home);
 //        mCircleNavigationView.setActiveCentreButtonIconColor(ContextCompat.getColor(MainActivity.this, android.R.color.white));
 //        mCircleNavigationView.setActiveCentreButtonBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.colorAccent));
     }
+
+
 }

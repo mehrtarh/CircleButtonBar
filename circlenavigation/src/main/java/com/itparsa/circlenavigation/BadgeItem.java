@@ -16,12 +16,14 @@
  */
 package com.itparsa.circlenavigation;
 
+import android.graphics.Typeface;
+
 import java.io.Serializable;
 
 @SuppressWarnings("unused")
 class BadgeItem implements Serializable {
 
-    private static final int BADGE_TEXT_MAX_NUMBER = 9;
+    private static final int BADGE_TEXT_MAX_NUMBER = 99;
 
     private int badgeIndex;
 
@@ -29,10 +31,36 @@ class BadgeItem implements Serializable {
 
     private int badgeColor;
 
-    BadgeItem(int badgeIndex, int badgeText, int badgeColor) {
+    private int badgeTextSize;
+
+    private int badgeTextColor;
+
+    private Typeface badgeFont;
+
+
+    BadgeItem(int badgeIndex, int badgeText, int badgeColor, int badgeTextColor, int badgeTextSize, Typeface badgeFont) {
         this.badgeIndex = badgeIndex;
         this.badgeText = badgeText;
         this.badgeColor = badgeColor;
+        this.badgeTextColor = badgeTextColor;
+        this.badgeTextSize = badgeTextSize;
+        this.badgeFont = badgeFont;
+    }
+
+    BadgeItem(int badgeIndex, int badgeText, int badgeColor, int badgeTextColor, int badgeTextSize) {
+        this(badgeIndex, badgeText, badgeColor, badgeTextColor, badgeTextSize,null);
+    }
+
+    int getBadgeTextSize() {
+        return badgeTextSize;
+    }
+
+    int getBadgeTextColor() {
+        return badgeTextColor;
+    }
+
+    Typeface getBadgeFont() {
+        return badgeFont;
     }
 
     int getBadgeIndex() {
@@ -54,7 +82,7 @@ class BadgeItem implements Serializable {
     String getBadgeText() {
         String badgeStringText;
         if (badgeText > BADGE_TEXT_MAX_NUMBER) {
-            badgeStringText = BADGE_TEXT_MAX_NUMBER + "+";
+            badgeStringText = "+" + BADGE_TEXT_MAX_NUMBER;
         } else {
             badgeStringText = String.valueOf(badgeText);
         }

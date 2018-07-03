@@ -617,9 +617,9 @@ public class CircleNavigationView extends BottomNavigationView {
 
 //                    centreButton.getDrawable().setColorFilter(inActiveCentreButtonIconColor, PorterDuff.Mode.SRC_IN);
                     centreButton.setFabIconColor(inActiveCentreButtonIconColor);
-                     if (centerButtonResurceBackground == NOT_DEFINED &&activeCentreButtonBackgroundColor != NOT_DEFINED) {
+                    if (centerButtonResurceBackground == NOT_DEFINED && activeCentreButtonBackgroundColor != NOT_DEFINED) {
 //                        centreButton.setBackgroundTintList(ColorStateList.valueOf(centreButtonColor));
-                         centreButton.setFabColor(centreButtonColor);
+                        centreButton.setFabColor(centreButtonColor);
                     }
 
                 }
@@ -970,7 +970,7 @@ public class CircleNavigationView extends BottomNavigationView {
      * @param itemIndex index
      * @param badgeText badge count text
      */
-    public void showBadgeAtIndex(int itemIndex, int badgeText, @ColorInt int badgeColor) {
+    public void showBadgeAtIndex(int itemIndex, int badgeText, @ColorInt int badgeColor, int badgeTextSizeSP, @ColorInt int badgeTexColor, Typeface badgeFont) {
         if (itemIndex < 0 || itemIndex > spaceItems.size()) {
             throwArrayIndexOutOfBoundsException(itemIndex);
         } else {
@@ -983,10 +983,14 @@ public class CircleNavigationView extends BottomNavigationView {
                 badgeView.setBackground(BadgeHelper.makeShapeDrawable(badgeColor));
             }
 
-            BadgeItem badgeItem = new BadgeItem(itemIndex, badgeText, badgeColor);
+            BadgeItem badgeItem = new BadgeItem(itemIndex, badgeText, badgeColor, badgeTexColor, badgeTextSizeSP, badgeFont);
             BadgeHelper.showBadge(badgeView, badgeItem, shouldShowBadgeWithNinePlus);
             badgeSaveInstanceHashMap.put(itemIndex, badgeItem);
         }
+    }
+
+    public void showBadgeAtIndex(int itemIndex, int badgeText, @ColorInt int badgeColor, int badgeTextSizeSP, @ColorInt int badgeTexColor) {
+        showBadgeAtIndex(itemIndex, badgeText, badgeColor, badgeTextSizeSP, badgeTexColor,null);
     }
 
     /**
@@ -1069,7 +1073,8 @@ public class CircleNavigationView extends BottomNavigationView {
         if (badgeSaveInstanceHashMap.get(badgeIndex) != null &&
                 (((BadgeItem) badgeSaveInstanceHashMap.get(badgeIndex)).getIntBadgeText() != badgeText)) {
             BadgeItem currentBadgeItem = (BadgeItem) badgeSaveInstanceHashMap.get(badgeIndex);
-            BadgeItem badgeItemForSave = new BadgeItem(badgeIndex, badgeText, currentBadgeItem.getBadgeColor());
+            BadgeItem badgeItemForSave = new BadgeItem(badgeIndex, badgeText, currentBadgeItem.getBadgeColor()
+                    , currentBadgeItem.getBadgeTextColor(), currentBadgeItem.getBadgeTextSize(), currentBadgeItem.getBadgeFont());
             BadgeHelper.forceShowBadge(
                     badgeList.get(badgeIndex),
                     badgeItemForSave,

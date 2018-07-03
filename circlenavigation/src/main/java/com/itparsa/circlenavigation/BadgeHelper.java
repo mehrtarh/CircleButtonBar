@@ -19,6 +19,7 @@ package com.itparsa.circlenavigation;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.os.Build;
+import android.support.annotation.Dimension;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorListenerAdapter;
 import android.view.View;
@@ -37,10 +38,22 @@ class BadgeHelper {
 
         Utils.changeViewVisibilityVisible(view);
         TextView badgeTextView = (TextView) view.findViewById(R.id.badge_text_view);
+        RelativeLayout mainBadgeContainer = (RelativeLayout) view.getParent();
+        int leftMargin2 = mainBadgeContainer.getLayoutParams().width / 2;
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) view.getLayoutParams();
+        params.setMargins(leftMargin2, params.topMargin, params.rightMargin, params.bottomMargin); // left, top, right, bottom
+        view.setLayoutParams(params);
+
+
         if (shouldShowBadgeWithNinePlus)
             badgeTextView.setText(badgeItem.getBadgeText());
         else
             badgeTextView.setText(badgeItem.getFullBadgeText());
+
+        if (badgeItem.getBadgeFont() != null)
+            badgeTextView.setTypeface(badgeItem.getBadgeFont());
+        badgeTextView.setTextColor(badgeItem.getBadgeTextColor());
+        badgeTextView.setTextSize(Dimension.SP,badgeItem.getBadgeTextSize());
 
         view.setScaleX(0);
         view.setScaleY(0);
@@ -85,6 +98,13 @@ class BadgeHelper {
      */
     static void forceShowBadge(RelativeLayout view, BadgeItem badgeItem, boolean shouldShowBadgeWithNinePlus) {
         Utils.changeViewVisibilityVisible(view);
+
+        RelativeLayout mainBadgeContainer = (RelativeLayout) view.getParent();
+        int leftMargin2 = mainBadgeContainer.getLayoutParams().width / 2;
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) view.getLayoutParams();
+        params.setMargins(leftMargin2, params.topMargin, params.rightMargin, params.bottomMargin); // left, top, right, bottom
+        view.setLayoutParams(params);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             view.setBackground(makeShapeDrawable(badgeItem.getBadgeColor()));
         }
@@ -93,6 +113,11 @@ class BadgeHelper {
             badgeTextView.setText(badgeItem.getBadgeText());
         else
             badgeTextView.setText(badgeItem.getFullBadgeText());
+
+        if (badgeItem.getBadgeFont() != null)
+            badgeTextView.setTypeface(badgeItem.getBadgeFont());
+        badgeTextView.setTextColor(badgeItem.getBadgeTextColor());
+        badgeTextView.setTextSize(Dimension.SP, badgeItem.getBadgeTextSize());
     }
 
     /**
