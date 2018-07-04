@@ -19,9 +19,11 @@ package com.itparsa.circlenavigation;
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.RippleDrawable;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -107,5 +109,10 @@ class Utils {
                                 normalColor
                         }
         );
+    }
+
+
+    public static int dpToPx(float dp, Context context) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.getResources().getDisplayMetrics());
     }
 }

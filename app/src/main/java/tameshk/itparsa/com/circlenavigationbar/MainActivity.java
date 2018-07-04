@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
             public void onCentreButtonClick() {
                 mCircleNavigationView.showBadgeAtIndex(2, 80, getResources().getColor(R.color.colorAccent)
                         , 16, getResources().getColor(R.color.colorBadgeText));
+
             }
 
             @Override
@@ -39,6 +40,12 @@ public class MainActivity extends AppCompatActivity {
 
                 if (itemIndex == 2)
                     mCircleNavigationView.hideBadgeAtIndex(2);
+
+                if (itemIndex == 0)
+                    mCircleNavigationView.showBadgeAtIndexWithoutText(3, 8, getResources().getColor(R.color.colorAccent));
+
+                if (itemIndex == 3)
+                    mCircleNavigationView.hideBadgeAtIndex(3);
 
             }
 

@@ -17,6 +17,7 @@
 package com.itparsa.circlenavigation;
 
 import android.graphics.Typeface;
+import android.support.annotation.Size;
 
 import java.io.Serializable;
 
@@ -33,6 +34,8 @@ class BadgeItem implements Serializable {
 
     private int badgeTextSize;
 
+    private int badgeCircleSize;
+
     private int badgeTextColor;
 
     private Typeface badgeFont;
@@ -48,7 +51,17 @@ class BadgeItem implements Serializable {
     }
 
     BadgeItem(int badgeIndex, int badgeText, int badgeColor, int badgeTextColor, int badgeTextSize) {
-        this(badgeIndex, badgeText, badgeColor, badgeTextColor, badgeTextSize,null);
+        this(badgeIndex, badgeText, badgeColor, badgeTextColor, badgeTextSize, null);
+    }
+
+    BadgeItem(int badgeIndex, @Size(min = 0) int badgeCircleSize, int badgeColor) {
+        this.badgeIndex = badgeIndex;
+        this.badgeCircleSize = badgeCircleSize;
+        this.badgeColor = badgeColor;
+    }
+
+     int getBadgeCircleSize() {
+        return badgeCircleSize;
     }
 
     int getBadgeTextSize() {

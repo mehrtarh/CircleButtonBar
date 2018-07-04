@@ -67,6 +67,7 @@
             tools:text="100" />
 
 
+
     </RelativeLayout>
 
     <!--android:layout_marginLeft="@dimen/badge_left_margin"-->

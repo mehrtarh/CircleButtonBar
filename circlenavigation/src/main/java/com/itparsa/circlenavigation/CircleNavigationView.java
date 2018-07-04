@@ -25,6 +25,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.Size;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
@@ -989,8 +990,31 @@ public class CircleNavigationView extends BottomNavigationView {
         }
     }
 
-    public void showBadgeAtIndex(int itemIndex, int badgeText, @ColorInt int badgeColor, int badgeTextSizeSP, @ColorInt int badgeTexColor) {
-        showBadgeAtIndex(itemIndex, badgeText, badgeColor, badgeTextSizeSP, badgeTexColor,null);
+    public void showBadgeAtIndexWithoutText(int itemIndex, @Size(min = 0) int badgeCircleSizeDP, @ColorInt int badgeColor) {
+
+
+        if (itemIndex < 0 || itemIndex > spaceItems.size()) {
+            throwArrayIndexOutOfBoundsException(itemIndex);
+        } else {
+            RelativeLayout badgeView = badgeList.get(itemIndex);
+
+            /*
+             * Set circle background to badge view
+             */
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                badgeView.setBackground(BadgeHelper.makeShapeDrawable(badgeColor));
+            }
+
+            BadgeItem badgeItem = new BadgeItem(itemIndex, badgeCircleSizeDP, badgeColor);
+            BadgeHelper.showBadge(badgeView, badgeItem, shouldShowBadgeWithNinePlus);
+            badgeSaveInstanceHashMap.put(itemIndex, badgeItem);
+        }
+
+    }
+
+    public void showBadgeAtIndex(int itemIndex, int badgeText, @ColorInt int badgeColor,
+                                 int badgeTextSizeSP, @ColorInt int badgeTexColor) {
+        showBadgeAtIndex(itemIndex, badgeText, badgeColor, badgeTextSizeSP, badgeTexColor, null);
     }
 
     /**
@@ -1200,7 +1224,8 @@ public class CircleNavigationView extends BottomNavigationView {
         this.centerButtonSelectedIcon = centerButtonSelectedIcon;
     }
 
-    public void setCenterButtonResourceBackground(@DrawableRes int centerButtonResourceBackground) {
+    public void setCenterButtonResourceBackground(
+            @DrawableRes int centerButtonResourceBackground) {
         centerButtonResurceBackground = centerButtonResourceBackground;
     }
 }

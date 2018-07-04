@@ -45,16 +45,22 @@ class BadgeHelper {
         view.setLayoutParams(params);
 
 
-        if (shouldShowBadgeWithNinePlus)
-            badgeTextView.setText(badgeItem.getBadgeText());
-        else
-            badgeTextView.setText(badgeItem.getFullBadgeText());
+        if (badgeItem.getBadgeCircleSize() == -1) {
+            if (shouldShowBadgeWithNinePlus)
+                badgeTextView.setText(badgeItem.getBadgeText());
+            else
+                badgeTextView.setText(badgeItem.getFullBadgeText());
 
-        if (badgeItem.getBadgeFont() != null)
-            badgeTextView.setTypeface(badgeItem.getBadgeFont());
-        badgeTextView.setTextColor(badgeItem.getBadgeTextColor());
-        badgeTextView.setTextSize(Dimension.SP,badgeItem.getBadgeTextSize());
-
+            if (badgeItem.getBadgeFont() != null)
+                badgeTextView.setTypeface(badgeItem.getBadgeFont());
+            badgeTextView.setTextColor(badgeItem.getBadgeTextColor());
+            badgeTextView.setTextSize(Dimension.SP, badgeItem.getBadgeTextSize());
+        } else {
+            int badgeSize = Utils.dpToPx(badgeItem.getBadgeCircleSize(), badgeTextView.getContext());
+            badgeTextView.getLayoutParams().width = badgeSize;
+            badgeTextView.getLayoutParams().height = badgeSize;
+            mainBadgeContainer.setPadding(0, 0, 0, 0);
+        }
         view.setScaleX(0);
         view.setScaleY(0);
 
@@ -109,15 +115,25 @@ class BadgeHelper {
             view.setBackground(makeShapeDrawable(badgeItem.getBadgeColor()));
         }
         TextView badgeTextView = (TextView) view.findViewById(R.id.badge_text_view);
-        if (shouldShowBadgeWithNinePlus)
-            badgeTextView.setText(badgeItem.getBadgeText());
-        else
-            badgeTextView.setText(badgeItem.getFullBadgeText());
 
-        if (badgeItem.getBadgeFont() != null)
-            badgeTextView.setTypeface(badgeItem.getBadgeFont());
-        badgeTextView.setTextColor(badgeItem.getBadgeTextColor());
-        badgeTextView.setTextSize(Dimension.SP, badgeItem.getBadgeTextSize());
+        if (badgeItem.getBadgeCircleSize() == -1) {
+            if (shouldShowBadgeWithNinePlus)
+                badgeTextView.setText(badgeItem.getBadgeText());
+            else
+                badgeTextView.setText(badgeItem.getFullBadgeText());
+
+
+            if (badgeItem.getBadgeFont() != null)
+                badgeTextView.setTypeface(badgeItem.getBadgeFont());
+            badgeTextView.setTextColor(badgeItem.getBadgeTextColor());
+            badgeTextView.setTextSize(Dimension.SP, badgeItem.getBadgeTextSize());
+
+        } else {
+            int badgeSize = Utils.dpToPx(badgeItem.getBadgeCircleSize(), badgeTextView.getContext());
+            badgeTextView.getLayoutParams().width = badgeSize;
+            badgeTextView.getLayoutParams().height = badgeSize;
+            mainBadgeContainer.setPadding(0, 0, 0, 0);
+        }
     }
 
     /**
